@@ -1,5 +1,5 @@
 # Face_Detector
-OpenCV face detection program
+OpenCV face detection program. You can choose to have the program detect faces from a photo or from your webcam.  
 
 Work in progress:
 You might have to change the number at line 38 if you are using an external webcam  
