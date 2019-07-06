@@ -3,7 +3,7 @@ from tkinter.filedialog import askopenfilename
 
 def detect_faces(frame):
     # convert image to gray scale
-    bw_frame = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    bw_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     # search coordinates of image
     faces = face_cascade.detectMultiScale(bw_frame, scaleFactor = 1.05, minNeighbors = 5)
@@ -34,18 +34,14 @@ if (menu_key == 'p'):
 
 elif (menu_key == 'w'):
     # create videocapture object via webcam
-    # think you might have to change this if you have external webcam
+    # you might have to change this if you have external webcam
     video = cv2.VideoCapture(0)
 
     while True:
         check, frame = video.read()
 
-        # convert each frame to grayscale
-        bw_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        faces = detect_faces(frame)
 
-        # search coordinates of image
-        faces = face_cascade.detectMultiScale(bw_frame, scaleFactor = 1.05, minNeighbors = 5)
-        
         try:
             if (faces.size > 0):
                 print('face detected')
@@ -56,7 +52,7 @@ elif (menu_key == 'w'):
         except AttributeError:
             print('no face detected')
             pass
-        cv2.imshow('Lord of gay', frame)
+        cv2.imshow('Face Detector', frame)
     
         key = cv2.waitKey(1)
         if key == ord('q'):
